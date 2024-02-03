@@ -41,7 +41,7 @@ module.exports = {
     [
       "jest-junit",
       {
-        suiteName: "senior-server",
+        suiteName: "api",
         outputDirectory: "reports",
         outputName: "jest.xml",
       },
