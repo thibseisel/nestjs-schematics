@@ -1,10 +1,10 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "nestjs-schematics": {
+    "application": {
       "description": "Generates a new NestJS application project.",
-      "factory": "./nestjs-schematics",
-      "schema": "./nestjs-schematics/schema.json"
+      "factory": "./application",
+      "schema": "./application/schema.json"
     }
   }
 }

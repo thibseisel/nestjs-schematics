@@ -8,12 +8,12 @@ import * as path from "path"
 
 const collectionPath = path.join(__dirname, "../collection.json")
 
-describe("nestjs-schematics", () => {
+describe("application", () => {
   let tree: UnitTestTree
   beforeAll(async () => {
     const runner = new SchematicTestRunner("schematics", collectionPath)
     tree = await runner.runSchematic(
-      "nestjs-schematics",
+      "application",
       { name: "my-application" },
       Tree.empty(),
     )
