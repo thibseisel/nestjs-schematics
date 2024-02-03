@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  api:
+    build: ./
+    container_name: senior-server
+    command: "npx nest start --watch --debug=0.0.0.0:9229"
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    env_file:
+      - .env
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist

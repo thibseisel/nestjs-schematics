@@ -4,6 +4,11 @@ src/**/*.js
 src/**/*.js.map
 src/**/*.d.ts
 
+# Template files
+src/**/files/package-lock.json
+!src/**/files/*.js
+!src/**/files/*.d.ts
+
 # IDEs
 .idea/
 jsconfig.json
