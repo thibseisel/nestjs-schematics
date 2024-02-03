@@ -9,7 +9,7 @@ describe("nestjs-schematics", () => {
     const runner = new SchematicTestRunner("schematics", collectionPath)
     const tree = await runner.runSchematic(
       "nestjs-schematics",
-      {},
+      { name: "my-application" },
       Tree.empty(),
     )
 

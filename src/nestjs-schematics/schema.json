@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://github.com/thibseisel/nestjs-schematics",
+  "title": "NestJS application option schema",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the application",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the new project?"
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the application",
+      "default": "0.1.0"
+    }
+  }
+}

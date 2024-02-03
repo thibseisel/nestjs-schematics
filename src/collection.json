@@ -3,7 +3,8 @@
   "schematics": {
     "nestjs-schematics": {
       "description": "Generates a new NestJS application project.",
-      "factory": "./nestjs-schematics"
+      "factory": "./nestjs-schematics",
+      "schema": "./nestjs-schematics/schema.json"
     }
   }
 }
