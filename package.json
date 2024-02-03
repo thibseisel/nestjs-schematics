@@ -2,24 +2,28 @@
   "name": "@tseisel/nestjs-schematics",
   "version": "0.1.0",
   "description": "Generates a better NestJS project template.",
+  "author": "Thibault Seisel",
+  "license": "MIT",
+  "keywords": [
+    "nestjs",
+    "schematics"
+  ],
+  "files": [
+    "src/**/*",
+    "!src/**/*.ts",
+    "src/**/*.d.ts",
+    "!src/**/*.spec.*",
+    "src/**/files/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "schematics": "./src/collection.json",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && jasmine src/**/*.spec.js",
     "prepare": "husky"
   },
-  "keywords": [
-    "nestjs",
-    "schematics"
-  ],
-  "author": "Thibault Seisel",
-  "license": "MIT",
-  "files": [
-    "src/**/*",
-    "!src/**/*.ts",
-    "src/**/*.d.ts",
-    "!src/**/*.spec.*"
-  ],
-  "schematics": "./src/collection.json",
   "dependencies": {
     "@angular-devkit/core": "^17.1.2",
     "@angular-devkit/schematics": "^17.1.2"
