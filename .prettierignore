@@ -1,0 +1,11 @@
+
+# Outputs
+src/**/*.js
+src/**/*.js.map
+src/**/*.d.ts
+
+# IDE
+.idea/
+
+# Misc
+node_modules/
