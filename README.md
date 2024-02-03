@@ -27,7 +27,13 @@ It takes a more opinionated approach by configuring various tools that improve c
 
 # How to use
 
-You can create a new project using this template with the NestJS CLI:
+Due to a limitation of the NestJS CLI, you have to install both this package and `@nestjs/cli` globally until after the project has been generated:
+
+```sh
+npm i -g @nestjs/cli @tseisel/nestjs-schematics
+```
+
+You can then generate a new project using this template with the NestJS CLI:
 
 ```sh
 nest new -c @tseisel/nestjs-schematics
