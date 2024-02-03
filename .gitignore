@@ -3,6 +3,7 @@
 src/**/*.js
 src/**/*.js.map
 src/**/*.d.ts
+!src/**/*.schema.d.ts
 
 # Template files
 src/**/files/package-lock.json

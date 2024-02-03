@@ -6,7 +6,7 @@ import {
   template,
   url,
 } from "@angular-devkit/schematics"
-import { ApplicationOptions } from "./application-options"
+import { ApplicationOptions } from "./application.schema"
 
 export default function (options: ApplicationOptions): Rule {
   return mergeWith(
