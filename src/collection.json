@@ -2,8 +2,8 @@
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "nestjs-schematics": {
-      "description": "A blank schematic.",
-      "factory": "./nestjs-schematics/index#nestjsSchematics"
+      "description": "Generates a new NestJS application project.",
+      "factory": "./nestjs-schematics"
     }
   }
 }
