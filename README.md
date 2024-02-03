@@ -1,28 +1,40 @@
-# Getting Started With Schematics
+# NestJS schematics
 
-This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
+Defines custom generation templates - also known as schematics - for the NestJS framework.
 
-### Testing
+# What's included
 
-To test locally, install `@angular-devkit/schematics-cli` globally and use the `schematics` command line tool. That tool acts the same as the `generate` command of the Angular CLI, but also has a debug mode.
+This project defines the following templates:
 
-Check the documentation with
+| Collection name | Description                     |
+| --------------- | ------------------------------- |
+| `application`   | Generates a new NestJS project. |
 
-```bash
-schematics --help
+## application
+
+This is an alternative to the default project template created when running `nest new`.
+I've grown tired configuring my favorite tools whenever I start a new project, so I made it a template.
+
+It takes a more opinionated approach by configuring various tools that improve code quality, so you can directly focus on writing great features instead of taking the whole day writing configurations files.
+
+- TypeScript in strict mode
+- Automated code formatting with Prettier
+- Automated code linting with ESLint
+- Docker and Docker Compose support
+- Build and bundle with Webpack
+- Auto-generated Swagger docs
+- Health-check endpoint
+
+# How to use
+
+You can create a new project using this template with the NestJS CLI:
+
+```sh
+nest new -c @tseisel/nestjs-schematics
 ```
 
-### Unit Testing
+A new project is then generated in a sub-folder.
 
-`npm run test` will run the unit tests, using Jasmine as a runner and test framework.
+# Contributing
 
-### Publishing
-
-To publish, simply do:
-
-```bash
-npm run build
-npm publish
-```
-
-That's it!
+Because NestJS borrows a lot from Angular, it uses exactly [the same tooling](https://angular.io/guide/schematics-authoring) for template-based project generation.
