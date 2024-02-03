@@ -4,7 +4,7 @@
   "description": "A blank schematics",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "npm run build && jasmine src/**/*_spec.js",
+    "test": "npm run build && jasmine src/**/*.spec.js",
     "prepare": "husky"
   },
   "keywords": [
@@ -12,6 +12,12 @@
   ],
   "author": "",
   "license": "MIT",
+  "files": [
+    "src/**/*",
+    "!src/**/*.ts",
+    "src/**/*.d.ts",
+    "!src/**/*.spec.*"
+  ],
   "schematics": "./src/collection.json",
   "dependencies": {
     "@angular-devkit/core": "^17.1.2",
