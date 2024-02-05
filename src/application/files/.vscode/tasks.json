@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "Typecheck",
+      "detail": "Run TypeScript compiler",
+      "group": { "kind": "build", "isDefault": true },
+      "command": "npx tsc -noEmit",
+      "problemMatcher": ["$tsc"],
+      "presentation": {
+        "reveal": "never",
+        "revealProblems": "onProblem"
+      }
+    },
+    {
+      "type": "eslint",
+      "label": "ESLint",
+      "detail": "Scan whole project for issues",
+      "group": "test",
+      "problemMatcher": ["$eslint-stylish"],
+      "presentation": {
+        "reveal": "never",
+        "revealProblems": "onProblem"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "Build",
+      "detail": "Compile application sources",
+      "group": "build",
+      "command": "npx nest build",
+      "problemMatcher": ["$tsc"],
+      "presentation": {
+        "reveal": "never",
+        "revealProblems": "onProblem"
+      },
+      "options": {
+        "env": {
+          "NODE_ENV": "development"
+        }
+      }
+    }
+  ]
+}
