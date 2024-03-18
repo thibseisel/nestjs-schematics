@@ -5,6 +5,10 @@
       "description": "Generates a new NestJS application project.",
       "factory": "./application",
       "schema": "./application/schema.json"
+    },
+    "docker": {
+      "description": "Configures Docker on an existing NestJS project.",
+      "factory": "./docker"
     }
   }
 }
