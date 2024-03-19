@@ -1,0 +1,24 @@
+name: Check pull request
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci --prefer-offline --ignore-scripts
+        name: Install Node.js dependencies
+      - run: npx prettier --check .
+        name: Check code formatting
+      - run: npm run build
+        name: Compile TypeScript
+      - run: npm test
+        name: Run unit-tests
