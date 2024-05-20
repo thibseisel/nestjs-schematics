@@ -1,10 +1,11 @@
 import { HttpStatus, INestApplication } from "@nestjs/common"
 import { Test } from "@nestjs/testing"
+import type { Server } from "http"
 import supertest from "supertest"
 import { exposeApiDocs } from "./api-docs"
 
 describe(exposeApiDocs, () => {
-  let app: INestApplication
+  let app: INestApplication<Server>
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({}).compile()

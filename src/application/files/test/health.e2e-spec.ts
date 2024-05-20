@@ -1,10 +1,11 @@
 import { AppModule } from "@/app.module"
 import { HttpStatus, INestApplication } from "@nestjs/common"
 import { Test } from "@nestjs/testing"
+import type { Server } from "http"
 import supertest from "supertest"
 
 describe("GET /health", () => {
-  let app: INestApplication
+  let app: INestApplication<Server>
 
   beforeEach(async () => {
     const moduleFixture = await Test.createTestingModule({
