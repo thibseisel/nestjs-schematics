@@ -16,6 +16,7 @@
   },
   "plugins": ["@typescript-eslint/eslint-plugin"],
   "rules": {
+    "@typescript-eslint/array-type": ["error", { "default": "generic" }],
     "@typescript-eslint/consistent-type-assertions": "error",
     "@typescript-eslint/explicit-member-accessibility": [
       "error",
