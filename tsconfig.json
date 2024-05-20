@@ -17,8 +17,8 @@
     "sourceMap": true,
     "strict": true,
     "target": "ES6",
-    "types": ["jasmine", "node"],
+    "types": ["jasmine", "node"]
   },
   "include": ["src"],
-  "exclude": ["src/*/files/**/*"],
+  "exclude": ["src/*/files/**/*"]
 }

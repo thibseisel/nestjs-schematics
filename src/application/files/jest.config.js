@@ -1,11 +1,16 @@
+const { pathsToModuleNameMapper } = require("ts-jest")
+const { compilerOptions } = require("./tsconfig.json")
+const { join } = require("path")
+
 /**
  * @type {import('ts-jest').JestConfigWithTsJest}
  */
 const baseConfig = {
   preset: "ts-jest/presets/default",
-  moduleNameMapper: {
-    "^(\\.{1,2}/.*)\\.js$": "$1",
-  },
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || [], {
+    prefix: join(__dirname, compilerOptions.baseUrl),
+    useESM: true,
+  }),
   resetMocks: true,
   setupFilesAfterEnv: ["jest-extended/all", "reflect-metadata"],
 }
@@ -41,7 +46,7 @@ module.exports = {
     [
       "jest-junit",
       {
-        suiteName: "senior-server",
+        suiteName: "api",
         outputDirectory: "reports",
         outputName: "jest.xml",
       },

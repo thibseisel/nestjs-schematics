@@ -6,9 +6,10 @@ Defines custom generation templates - also known as schematics - for the NestJS 
 
 This project defines the following templates:
 
-| Collection name | Description                     |
-| --------------- | ------------------------------- |
-| `application`   | Generates a new NestJS project. |
+| Collection name | Description                           |
+| --------------- | ------------------------------------- |
+| `application`   | Generates a new NestJS project.       |
+| `docker`        | Generates Docker configuration files. |
 
 ## application
 
@@ -24,6 +25,22 @@ It takes a more opinionated approach by configuring various tools that improve c
 - Build and bundle with Webpack
 - Auto-generated Swagger docs
 - Health-check endpoint
+
+## docker
+
+Generates configuration files that are required for development and deployment with Docker. This schematic can be applied on an existing project.
+
+The following files are generated at the project root:
+
+- `.dockerignore`
+- `Dockerfile`
+- `docker-compose.yml`
+
+If any of these files already exist, it is replaced by the generated version.
+
+```sh
+nest g -c @tseisel/nestjs-schematics docker
+```
 
 # How to use
 
