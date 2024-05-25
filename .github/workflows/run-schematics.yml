@@ -1,0 +1,30 @@
+name: Test NestJS schematics
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm install --global @nestjs/cli@^10
+        name: Install NestJS CLI globally
+      - run: |
+          npm clean-install --no-audit --ignore-scripts --prefer-offline
+          npm run build
+          npm install --global .
+        name: Install schematics globally
+      - run: >
+          cd .. &&
+          nest new test-app --dry-run
+          --package-manager npm
+          --collection @tseisel/nestjs-schematics
+        name: Test generating a new NestJS application
+        timeout-minutes: 1
