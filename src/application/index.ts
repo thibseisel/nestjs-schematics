@@ -14,8 +14,16 @@ export default function (options: ApplicationOptions): Rule {
 }
 
 function renderTemplate(options: ApplicationOptions): Rule {
-  const path = options.directory || options.name
+  const path = targetDirectory(options)
   return mergeWith(
     apply(url("./files"), [template({ ...options }), move(path)]),
   )
+}
+
+function targetDirectory(options: ApplicationOptions): string {
+  if (options.directory && options.directory !== "undefined") {
+    return options.directory
+  } else {
+    return options.name
+  }
 }
