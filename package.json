@@ -1,6 +1,6 @@
 {
   "name": "@tseisel/nestjs-schematics",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Generates a better NestJS project template.",
   "author": "Thibault Seisel",
   "license": "MIT",
