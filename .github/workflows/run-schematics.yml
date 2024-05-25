@@ -22,7 +22,6 @@ jobs:
           npm install --global .
         name: Install schematics globally
       - run: >
-          cd .. &&
           nest new test-app --dry-run
           --package-manager npm
           --collection @tseisel/nestjs-schematics

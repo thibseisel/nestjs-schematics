@@ -20,8 +20,10 @@
   },
   "schematics": "./src/collection.json",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -b tsconfig.json",
+    "clean": "tsc -b tsconfig.json --clean",
     "test": "npm run build && jasmine src/**/*.spec.js",
+    "prepublishOnly": "npm run clean && npm run build",
     "prepare": "husky"
   },
   "dependencies": {
