@@ -14,7 +14,8 @@ export default function (options: ApplicationOptions): Rule {
 }
 
 function renderTemplate(options: ApplicationOptions): Rule {
+  const path = options.directory || options.name
   return mergeWith(
-    apply(url("./files"), [template({ ...options }), move(options.name)]),
+    apply(url("./files"), [template({ ...options }), move(path)]),
   )
 }
