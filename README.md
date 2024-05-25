@@ -2,14 +2,20 @@
 
 Defines custom generation templates - also known as schematics - for the NestJS framework.
 
-# What's included
-
 This project defines the following templates:
 
 | Collection name | Description                           |
 | --------------- | ------------------------------------- |
 | `application`   | Generates a new NestJS project.       |
 | `docker`        | Generates Docker configuration files. |
+
+# How to use
+
+Due to a limitation of the NestJS CLI, you have to install both this package and `@nestjs/cli` globally:
+
+```sh
+npm i -g @nestjs/cli @tseisel/nestjs-schematics
+```
 
 ## application
 
@@ -21,10 +27,15 @@ It takes a more opinionated approach by configuring various tools that improve c
 - TypeScript in strict mode
 - Automated code formatting with Prettier
 - Automated code linting with ESLint
-- Docker and Docker Compose support
 - Build and bundle with Webpack
 - Auto-generated Swagger docs
 - Health-check endpoint
+
+Run the following command to generate a new project in a subfolder:
+
+```sh
+nest new -c @tseisel/nestjs-schematics
+```
 
 ## docker
 
@@ -41,22 +52,6 @@ If any of these files already exist, it is replaced by the generated version.
 ```sh
 nest g -c @tseisel/nestjs-schematics docker
 ```
-
-# How to use
-
-Due to a limitation of the NestJS CLI, you have to install both this package and `@nestjs/cli` globally until after the project has been generated:
-
-```sh
-npm i -g @nestjs/cli @tseisel/nestjs-schematics
-```
-
-You can then generate a new project using this template with the NestJS CLI:
-
-```sh
-nest new -c @tseisel/nestjs-schematics
-```
-
-A new project is then generated in a sub-folder.
 
 # Contributing
 
