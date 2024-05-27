@@ -6,6 +6,10 @@
       "factory": "./application",
       "schema": "./application/schema.json"
     },
+    "azure": {
+      "description": "Configures Azure Pipelines on an existing NestJS project.",
+      "factory": "./azure"
+    },
     "docker": {
       "description": "Configures Docker on an existing NestJS project.",
       "factory": "./docker"
