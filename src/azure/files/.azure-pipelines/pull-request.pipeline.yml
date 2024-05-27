@@ -1,0 +1,86 @@
+name: Pull-Request check for $(Build.SourceBranch)
+trigger: none # Only triggered as part of a Branch Policy.
+variables:
+  npm_config_cache: $(Pipeline.Workspace)/.npm
+  TargetBranch: origin/$(System.PullRequest.TargetBranchName)
+
+jobs:
+  - job: Test
+    steps:
+      - checkout: self
+        fetchDepth: 0
+
+      - task: UseNode@1
+        displayName: Install Node.js
+        inputs:
+          version: 20.x
+
+      - task: Cache@2
+        displayName: Cache npm
+        inputs:
+          key: 'npm | "$(Agent.OS)" | package-lock.json'
+          restoreKeys: |
+            npm | "$(Agent.OS)"
+          path: $(npm_config_cache)
+
+      - task: Npm@1
+        displayName: Install node_modules
+        inputs:
+          customCommand: clean-install --ignore-scripts --no-audit --prefer-offline
+
+      - script: npm audit --audit-level=high
+        displayName: Check npm dependency vulnerabilities
+        continueOnError: true
+
+      - script: npx tsc -noEmit
+        displayName: Type-check code
+
+      - script: npx prettier --check .
+        displayName: Check code formatting with Prettier
+
+      - script: npm run lint
+        displayName: Analyze code with ESLint
+
+      - script: npm run build
+        displayName: Build application
+        env:
+          NODE_ENV: production
+
+      - script: npx jest --ci --coverage --selectProjects unit --changedSince=$(TargetBranch)
+        displayName: Run unit tests with coverage
+        env:
+          # Required for resolving ES modules in tests
+          NODE_OPTIONS: --experimental-vm-modules
+          # Configure jest-junit report
+          JEST_SUITE_NAME: unit tests
+          JEST_JUNIT_OUTPUT_NAME: unit.xml
+
+      - task: PublishTestResults@2
+        displayName: Publish unit test results
+        condition: succeededOrFailed()
+        inputs:
+          testRunTitle: Unit tests
+          testResultsFormat: JUnit
+          testResultsFiles: "reports/unit.xml"
+
+      - task: PublishCodeCoverageResults@2
+        displayName: Publish coverage results
+        inputs:
+          summaryFileLocation: "reports/cobertura-coverage.xml"
+
+      - script: npx jest --ci --selectProjects e2e
+        displayName: Run end-to-end tests
+        env:
+          # Required for resolving ES modules in tests
+          NODE_OPTIONS: --experimental-vm-modules
+          # Configure jest-junit report
+          JEST_SUITE_NAME: end-to-end tests
+          JEST_JUNIT_OUTPUT_NAME: e2e.xml
+
+      - task: PublishTestResults@2
+        displayName: Publish end-to-end test results
+        condition: succeededOrFailed()
+        inputs:
+          testRunTitle: End-to-end tests
+          testResultsFormat: JUnit
+          testResultsFiles: "reports/e2e.xml"
