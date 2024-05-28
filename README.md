@@ -7,6 +7,7 @@ This project defines the following templates:
 | Collection name | Description                           |
 | --------------- | ------------------------------------- |
 | `application`   | Generates a new NestJS project.       |
+| `azure`         | Generate Azure Pipelines definitions. |
 | `docker`        | Generates Docker configuration files. |
 
 # How to use
@@ -35,6 +36,14 @@ Run the following command to generate a new project in a subfolder:
 
 ```sh
 nest new -c @tseisel/nestjs-schematics
+```
+
+## azure
+
+Generates configuration files to run a pull request check pipeline on an Azure DevOps build Agent.
+
+```sh
+nest g -c @tseisel/nestjs-schematics azure
 ```
 
 ## docker
