@@ -27,7 +27,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@angular-devkit/core": "^17.3.0",
+    "@angular-devkit/core": "^18.0.2",
     "@angular-devkit/schematics": "^17.3.0"
   },
   "devDependencies": {
