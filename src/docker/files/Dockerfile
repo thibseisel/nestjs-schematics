@@ -8,7 +8,8 @@ ENTRYPOINT [ "dumb-init", "--" ]
 FROM base as development
 # Install Node.js development dependencies
 COPY package*.json ./
-RUN npm clean-install --ignore-scripts --prefer-offline --no-audit
+RUN --mount=type=cache,id=npm,target=/root/.npm \
+    npm clean-install --ignore-scripts --prefer-offline --no-audit
 # Run application in development mode
 CMD [ "npx", "nest", "start", "--watch", "--debug", "0.0.0.0:9229" ]
 
@@ -21,7 +22,8 @@ FROM base as production
 # Install Node.js production dependencies
 ENV NODE_ENV=production
 COPY package*.json ./
-RUN npm clean-install --ignore-scripts --prefer-offline --no-audit
+RUN --mount=type=cache,id=npm,target=/root/.npm \
+    npm clean-install --ignore-scripts --prefer-offline --no-audit
 # Run application in production mode
 COPY --from=builder /usr/src/app/dist ./dist
 CMD [ "node", "--enable-source-maps", "dist/main.js" ]
