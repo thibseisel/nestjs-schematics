@@ -2,23 +2,61 @@ name: Check pull request
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [main]
 
 jobs:
-  test:
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
+          node-version: "20.x"
           node-version-file: package.json
           cache: npm
           cache-dependency-path: package-lock.json
-      - run: npm ci --prefer-offline --ignore-scripts
-        name: Install Node.js dependencies
-      - run: npx prettier --check .
-        name: Check code formatting
-      - run: npm run build
-        name: Compile TypeScript
-      - run: npm test
-        name: Run unit-tests
+
+      - name: Install Node.js dependencies
+        run: npm ci --prefer-offline --ignore-scripts
+
+      - name: Check code formatting
+        run: npx prettier --check .
+
+      - name: Compile TypeScript
+        run: npm run build
+
+      - name: Run unit-tests
+        run: npm test
+
+  run-schematics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          node-version-file: package.json
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install NestJS CLI globally
+        run: npm install --global @nestjs/cli@^10
+
+      - name: Install schematics globally
+        run: |
+          npm ci --prefer-offline --ignore-scripts
+          npm run build
+          npm install --global .
+
+      - name: Test generating a new NestJS application
+        run: >
+          nest new test-app --dry-run
+          --package-manager npm
+          --collection @tseisel/nestjs-schematics
+        timeout-minutes: 1
