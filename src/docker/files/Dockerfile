@@ -7,8 +7,9 @@ ENTRYPOINT [ "dumb-init", "--" ]
 
 FROM base as development
 # Install Node.js development dependencies
-COPY package*.json ./
-RUN --mount=type=cache,id=npm,target=/root/.npm \
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,id=npm,target=/root/.npm \
     npm clean-install --ignore-scripts --prefer-offline --no-audit
 # Run application in development mode
 CMD [ "npx", "nest", "start", "--watch", "--debug", "0.0.0.0:9229" ]
@@ -21,8 +22,9 @@ RUN NODE_ENV=production npm run build
 FROM base as production
 # Install Node.js production dependencies
 ENV NODE_ENV=production
-COPY package*.json ./
-RUN --mount=type=cache,id=npm,target=/root/.npm \
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,id=npm,target=/root/.npm \
     npm clean-install --ignore-scripts --prefer-offline --no-audit
 # Run application in production mode
 COPY --from=builder /usr/src/app/dist ./dist
