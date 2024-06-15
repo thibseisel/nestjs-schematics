@@ -11,8 +11,6 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,id=npm,target=/root/.npm \
     npm clean-install --ignore-scripts --prefer-offline --no-audit
-# Run application in development mode
-CMD [ "npx", "nest", "start", "--watch", "--debug", "0.0.0.0:9229" ]
 
 FROM development as builder
 # Assemble production artifacts
@@ -28,4 +26,5 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     npm clean-install --ignore-scripts --prefer-offline --no-audit
 # Run application in production mode
 COPY --from=builder /usr/src/app/dist ./dist
+USER node
 CMD [ "node", "--enable-source-maps", "dist/main.js" ]
