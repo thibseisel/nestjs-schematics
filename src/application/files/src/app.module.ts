@@ -1,5 +1,5 @@
 import { BeforeApplicationShutdown, Logger, Module } from "@nestjs/common"
-import { CoreModule } from "./core"
+import { CoreModule } from "./core/core.module"
 import { FeatureModule } from "./feature.module"
 
 /**
