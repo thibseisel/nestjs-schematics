@@ -6,7 +6,7 @@
   "scripts": {
     "build": "nest build",
     "start": "node --enable-source-maps dist/main.js",
-    "dev": "nest start --watch --debug-0.0.0.0:9229",
+    "dev": "nest start --watch --debug=0.0.0.0:9229",
     "lint": "eslint --ext .ts .",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
     "prepare": "husky"
