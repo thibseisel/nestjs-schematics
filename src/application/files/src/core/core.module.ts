@@ -1,6 +1,6 @@
 import { ClassSerializerInterceptor, Module } from "@nestjs/common"
-import { APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core"
-import { ThrottlerModule, minutes } from "@nestjs/throttler"
+import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core"
+import { ThrottlerGuard, ThrottlerModule, minutes } from "@nestjs/throttler"
 import { RootConfigModule } from "./config/root-config.module"
 import { RequestValidationPipe } from "./request-validation.pipe"
 
@@ -14,6 +14,7 @@ const NestThrottlerModule = ThrottlerModule.forRoot([
 @Module({
   imports: [NestThrottlerModule, RootConfigModule],
   providers: [
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
     { provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
     { provide: APP_PIPE, useClass: RequestValidationPipe },
   ],
