@@ -1,22 +1,21 @@
-const { pathsToModuleNameMapper } = require("ts-jest")
+const { join } = require("node:path")
+const { pathsToModuleNameMapper, createDefaultPreset } = require("ts-jest")
 const { compilerOptions } = require("./tsconfig.json")
-const { join } = require("path")
 
 /**
- * @type {import('ts-jest').JestConfigWithTsJest}
+ * @type {import("ts-jest").JestConfigWithTsJest}
  */
 const baseConfig = {
-  preset: "ts-jest/presets/default",
+  ...createDefaultPreset(),
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || [], {
     prefix: join(__dirname, compilerOptions.baseUrl),
-    useESM: true,
   }),
   resetMocks: true,
   setupFilesAfterEnv: ["jest-extended/all", "reflect-metadata"],
 }
 
 /**
- * @type {import('ts-jest').JestConfigWithTsJest}
+ * @type {import("ts-jest").JestConfigWithTsJest}
  */
 module.exports = {
   projects: [
@@ -40,7 +39,7 @@ module.exports = {
   collectCoverage: false,
   collectCoverageFrom: ["**/*.ts", "!**/*.module.ts"],
   coverageDirectory: "reports",
-  coverageReporters: ["text", "cobertura", "lcov"],
+  coverageReporters: ["text", "cobertura"],
   reporters: [
     "default",
     [
